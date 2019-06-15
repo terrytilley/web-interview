@@ -45,6 +45,33 @@ class App extends Component {
       })
   }
 
+  onSubmit = () => {
+    fetch(`${API_ENDPOINT}/appointments`, {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: this.state.userId,
+        dateTime: this.state.selectedAppointment.time,
+        notes: this.state.appointment.notes,
+        type: this.state.selectedAppointmentType,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log('Success:', JSON.stringify(response))
+        this.setState({
+          ...this.state,
+          user: null,
+          appointment: {},
+          selectedAppointment: {},
+          selectedAppointmentType: 'gp',
+        })
+      })
+      .catch(error => console.error('Error:', error))
+  }
+
   render() {
     // calculate matching slots
     const slots = this.state.availableSlots.filter(slot => {
@@ -168,6 +195,12 @@ class App extends Component {
                 <h3>Notes</h3>
                 <div className="user-input">
                   <Textarea
+                    onChange={e =>
+                      this.setState({
+                        ...this.state,
+                        appointment: { notes: e.target.value },
+                      })
+                    }
                     placeholder="Describe your symptoms"
                     cols="50"
                     rows="10"
@@ -199,10 +232,7 @@ class App extends Component {
               disabled={!this.state.selectedAppointment.id}
               active="true"
               fullwidth="true"
-              onClick={() => {
-                /* TODO: submit the data */
-                console.log('Submit the data')
-              }}
+              onClick={this.onSubmit}
             >
               Book appointment
             </Button>

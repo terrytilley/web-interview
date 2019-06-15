@@ -11,7 +11,9 @@ function Header() {
         <span />
         <span />
       </button>
-      <img src={logo} className="app-logo" alt="Babylon Health" />
+      <a href="/">
+        <img src={logo} className="app-logo" alt="Babylon Health" />
+      </a>
       <div className="user-icon">NU</div>
     </div>
   )

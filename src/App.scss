@@ -18,42 +18,36 @@ a {
 
 .container {
   width: 100%;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
   position: relative;
-
-  @media (min-width: 576px) {
-    max-width: 540px;
-  }
-
-  @media (min-width: 768px) {
-    max-width: 720px;
-  }
-
-  @media (min-width: 992px) {
-    max-width: 960px;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 1040px;
-  }
-}
-
-.button {
-  box-sizing: border-box;
-  padding: 12px;
-  background-color: $primary-dark;
-  color: $secondary-light;
-  width: calc(25% - 12px);
-  height: 42px;
-  margin-right: 12px;
-  display: inline-block;
-  text-align: center;
 }
 
 .heading {
   color: $label-color;
   font-size: 36px;
+}
+
+.heading-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3rem;
+
+  .icon {
+    width: 40px;
+  }
+
+  .button-group {
+    h3 {
+      margin-top: 0;
+    }
+  }
 }

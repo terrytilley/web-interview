@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons'
 
 import Header from './components/Header'
+import Button from './components/Button'
 import UserSelect from './components/UserSelect'
 import { API_ENDPOINT } from './config'
 
@@ -51,21 +54,34 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="container">
-          <h2 className="heading">New Appointment</h2>
+          <h1 className="heading">New Appointment</h1>
           <UserSelect userId={this.state.userId} />
-          {appointmentTypes.map(({ key, label }) => (
-            <button
-              className="button"
-              key={key}
-              onClick={() => {
-                this.setState({ selectedAppointmentType: key })
-              }}
-            >
-              {label}
-            </button>
-          ))}
+
+          <section className="options consultant-type">
+            <div className="icon">
+              <FontAwesomeIcon icon={faStethoscope} />
+            </div>
+
+            <div className="button-group">
+              <h3>Consultant Type</h3>
+              {appointmentTypes.map(({ key, label }) => (
+                <Button
+                  key={key}
+                  round="true"
+                  active={(
+                    this.state.selectedAppointmentType === key
+                  ).toString()}
+                  onClick={() =>
+                    this.setState({ selectedAppointmentType: key })
+                  }
+                >
+                  {label}
+                </Button>
+              ))}
+            </div>
+          </section>
+
           <div>
-            <strong>Appointments</strong>
             {slots.map(slot => (
               <li
                 key={slot.id}
@@ -78,10 +94,12 @@ class App extends Component {
               </li>
             ))}
           </div>
+
           <div>
             <strong>Notes</strong>
             <textarea />
           </div>
+
           <div>
             <button
               className="button"

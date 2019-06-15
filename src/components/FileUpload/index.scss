@@ -1,0 +1,35 @@
+@import '../../constants.scss';
+
+.file-input {
+  color: transparent;
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: '+';
+    color: black;
+    display: inline-block;
+    background: transparent;
+    border: $border-standard;
+    border-radius: 8px;
+    padding: 1.5rem;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
+
+  &:hover::before {
+    border-color: black;
+  }
+
+  &:active {
+    outline: 0;
+
+    &::before {
+      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+  }
+}

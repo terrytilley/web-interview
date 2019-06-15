@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faVideo,
   faClock,
+  faImages,
   faStickyNote,
   faStethoscope,
 } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +12,7 @@ import {
 import Header from './components/Header'
 import Button from './components/Button'
 import Textarea from './components/Textarea'
+import FileUpload from './components/FileUpload'
 import UserSelect from './components/UserSelect'
 
 import { API_ENDPOINT } from './config'
@@ -174,6 +176,23 @@ class App extends Component {
               </div>
             </section>
           ) : null}
+
+          {this.state.selectedAppointment.id ? (
+            <section className="options photo">
+              <div className="icon">
+                <FontAwesomeIcon icon={faImages} />
+              </div>
+
+              <div className="content">
+                <h3>Attach A Photo</h3>
+                <div className="user-input">
+                  <FileUpload />
+                </div>
+              </div>
+            </section>
+          ) : null}
+
+          <hr />
 
           <div>
             <Button

@@ -1,0 +1,25 @@
+@import '../../constants.scss';
+
+.user-select {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: $border-standard;
+
+  .avatar {
+    flex-grow: 1;
+    max-width: 100px;
+    margin-right: 1.5rem;
+  }
+
+  .name {
+    flex-grow: 1;
+    font-size: 1rem;
+  }
+
+  .link {
+    text-decoration: none;
+  }
+}

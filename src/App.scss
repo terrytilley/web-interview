@@ -1,7 +1,19 @@
 @import './constants.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: $primary;
+
+  &:hover {
+    color: $primary-dark;
+  }
 }
 
 .container {
@@ -41,8 +53,7 @@ body {
   text-align: center;
 }
 
-h2 {
-  &.h6 {
-    font-size: 24px;
-  }
+.heading {
+  color: $label-color;
+  font-size: 36px;
 }

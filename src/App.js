@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Moment from 'react-moment'
 
 import Header from './components/Header'
+import UserSelect from './components/UserSelect'
 import { API_ENDPOINT } from './config'
 
 import 'normalize.css'
@@ -13,6 +14,7 @@ class App extends Component {
 
     this.state = {
       userId: 1,
+      user: null,
       selectedAppointment: null,
       selectedAppointmentType: 'gp',
       availableSlots: [],
@@ -49,7 +51,8 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="container">
-          <h2 className="h6">New appointment</h2>
+          <h2 className="heading">New Appointment</h2>
+          <UserSelect userId={this.state.userId} />
           {appointmentTypes.map(({ key, label }) => (
             <button
               className="button"

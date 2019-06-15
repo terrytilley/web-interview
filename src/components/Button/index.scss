@@ -9,7 +9,7 @@
   margin-right: 1rem;
   margin-bottom: 1rem;
   padding: 0.375rem 1rem;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   cursor: pointer;
   border: $border-standard;
   text-transform: capitalize;
@@ -22,6 +22,10 @@
   &.active {
     color: $secondary-light;
     background-color: $primary-dark;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
   }
 
   &:last-child {

@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faVideo,
   faClock,
+  faStickyNote,
   faStethoscope,
 } from '@fortawesome/free-solid-svg-icons'
 
 import Header from './components/Header'
 import Button from './components/Button'
+import Textarea from './components/Textarea'
 import UserSelect from './components/UserSelect'
 
 import { API_ENDPOINT } from './config'
@@ -70,7 +72,7 @@ class App extends Component {
 
             <div className="content">
               <h3>Consultant Type</h3>
-              <div className="button-group">
+              <div className="user-input">
                 {appointmentTypes.map(({ key, label }) => (
                   <Button
                     key={key}
@@ -97,7 +99,7 @@ class App extends Component {
 
               <div className="content">
                 <h3>Date &amp; Time</h3>
-                <div className="button-group">
+                <div className="user-input">
                   {slots.map(slot => (
                     <Button
                       key={slot.id}
@@ -129,7 +131,7 @@ class App extends Component {
 
               <div className="content">
                 <h3>Appointment Type</h3>
-                <div className="button-group">
+                <div className="user-input">
                   {this.state.selectedAppointment.appointmentType.map(
                     (type, index) => (
                       <Button
@@ -139,7 +141,6 @@ class App extends Component {
                           this.state.appointment.type === type
                         ).toString()}
                         onClick={() => {
-                          console.log('Appointment Type')
                           this.setState({
                             ...this.state,
                             appointment: { ...this.state.appointment, type },
@@ -155,22 +156,36 @@ class App extends Component {
             </section>
           ) : null}
 
-          <div>
-            <strong>Notes</strong>
-            <textarea />
-          </div>
+          {this.state.selectedAppointment.id ? (
+            <section className="options notes">
+              <div className="icon">
+                <FontAwesomeIcon icon={faStickyNote} />
+              </div>
+
+              <div className="content">
+                <h3>Notes</h3>
+                <div className="user-input">
+                  <Textarea
+                    placeholder="Describe your symptoms"
+                    cols="50"
+                    rows="10"
+                  />
+                </div>
+              </div>
+            </section>
+          ) : null}
 
           <div>
-            <button
-              className="button"
-              disabled={true}
+            <Button
+              disabled={!this.state.selectedAppointment.id}
+              active="true"
               onClick={() => {
                 /* TODO: submit the data */
                 console.log('Submit the data')
               }}
             >
               Book appointment
-            </button>
+            </Button>
           </div>
         </div>
       </div>

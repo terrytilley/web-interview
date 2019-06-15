@@ -1,0 +1,11 @@
+@import '../../constants.scss';
+
+.textarea {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0.375rem 0.75rem;
+  background-color: #fff;
+  border: $border-standard;
+  border-radius: 8px;
+}

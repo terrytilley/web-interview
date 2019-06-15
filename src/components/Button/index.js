@@ -6,6 +6,7 @@ import './index.scss'
 
 function Button(props) {
   const buttonClasses = classNames('button', {
+    disabled: props.disabled,
     round: props.round === 'true',
     active: props.active === 'true',
   })
@@ -18,6 +19,7 @@ function Button(props) {
 }
 
 Button.propTypes = {
+  disabled: PropTypes.bool,
   active: PropTypes.string,
   children: PropTypes.node.isRequired,
 }

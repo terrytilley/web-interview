@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStethoscope } from '@fortawesome/free-solid-svg-icons'
+import { faStethoscope, faClock } from '@fortawesome/free-solid-svg-icons'
 
 import Header from './components/Header'
 import Button from './components/Button'
@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       userId: 1,
       user: null,
-      selectedAppointment: null,
+      selectedAppointment: {},
       selectedAppointmentType: 'gp',
       availableSlots: [],
     }
@@ -62,22 +62,51 @@ class App extends Component {
               <FontAwesomeIcon icon={faStethoscope} />
             </div>
 
-            <div className="button-group">
+            <div className="content">
               <h3>Consultant Type</h3>
-              {appointmentTypes.map(({ key, label }) => (
-                <Button
-                  key={key}
-                  round="true"
-                  active={(
-                    this.state.selectedAppointmentType === key
-                  ).toString()}
-                  onClick={() =>
-                    this.setState({ selectedAppointmentType: key })
-                  }
-                >
-                  {label}
-                </Button>
-              ))}
+              <div className="button-group">
+                {appointmentTypes.map(({ key, label }) => (
+                  <Button
+                    key={key}
+                    round="true"
+                    active={(
+                      this.state.selectedAppointmentType === key
+                    ).toString()}
+                    onClick={() =>
+                      this.setState({ selectedAppointmentType: key })
+                    }
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="options date-time">
+            <div className="icon">
+              <FontAwesomeIcon icon={faClock} />
+            </div>
+
+            <div className="content">
+              <h3>Date &amp; Time</h3>
+              <div className="button-group">
+                {slots.map(slot => (
+                  <Button
+                    key={slot.id}
+                    round="true"
+                    active={(
+                      this.state.selectedAppointment &&
+                      this.state.selectedAppointment.id === slot.id
+                    ).toString()}
+                    onClick={() => {
+                      this.setState({ selectedAppointment: slot })
+                    }}
+                  >
+                    <Moment format="D MMM - HH:mm">{slot.time}</Moment>
+                  </Button>
+                ))}
+              </div>
             </div>
           </section>
 

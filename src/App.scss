@@ -45,9 +45,13 @@ a {
     width: 40px;
   }
 
-  .button-group {
+  .content {
     h3 {
       margin-top: 0;
+    }
+
+    .button-group {
+      // overflow: auto;
     }
   }
 }

@@ -198,6 +198,7 @@ class App extends Component {
             <Button
               disabled={!this.state.selectedAppointment.id}
               active="true"
+              fullwidth="true"
               onClick={() => {
                 /* TODO: submit the data */
                 console.log('Submit the data')

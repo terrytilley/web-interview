@@ -9,6 +9,7 @@ function Button(props) {
     disabled: props.disabled,
     round: props.round === 'true',
     active: props.active === 'true',
+    'full-width': props.fullwidth === 'true',
   })
 
   return (

@@ -21,10 +21,6 @@
     cursor: pointer;
   }
 
-  &:hover::before {
-    border-color: black;
-  }
-
   &:active {
     outline: 0;
 

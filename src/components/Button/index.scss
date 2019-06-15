@@ -19,6 +19,11 @@
     border-radius: 100px;
   }
 
+  &.full-width {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+
   &.active {
     color: $secondary-light;
     background-color: $primary-dark;
@@ -26,6 +31,7 @@
 
   &.disabled {
     cursor: not-allowed;
+    background-color: $primary;
   }
 
   &:last-child {

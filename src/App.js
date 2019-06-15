@@ -1,11 +1,16 @@
-import React, { Component } from 'react'
 import Moment from 'react-moment'
+import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStethoscope, faClock } from '@fortawesome/free-solid-svg-icons'
+import {
+  faVideo,
+  faClock,
+  faStethoscope,
+} from '@fortawesome/free-solid-svg-icons'
 
 import Header from './components/Header'
 import Button from './components/Button'
 import UserSelect from './components/UserSelect'
+
 import { API_ENDPOINT } from './config'
 
 import 'normalize.css'
@@ -18,9 +23,10 @@ class App extends Component {
     this.state = {
       userId: 1,
       user: null,
+      availableSlots: [],
+      appointment: {},
       selectedAppointment: {},
       selectedAppointmentType: 'gp',
-      availableSlots: [],
     }
   }
 
@@ -83,46 +89,71 @@ class App extends Component {
             </div>
           </section>
 
-          <section className="options date-time">
-            <div className="icon">
-              <FontAwesomeIcon icon={faClock} />
-            </div>
-
-            <div className="content">
-              <h3>Date &amp; Time</h3>
-              <div className="button-group">
-                {slots.map(slot => (
-                  <Button
-                    key={slot.id}
-                    round="true"
-                    active={(
-                      this.state.selectedAppointment &&
-                      this.state.selectedAppointment.id === slot.id
-                    ).toString()}
-                    onClick={() => {
-                      this.setState({ selectedAppointment: slot })
-                    }}
-                  >
-                    <Moment format="D MMM - HH:mm">{slot.time}</Moment>
-                  </Button>
-                ))}
+          {slots.length > 0 ? (
+            <section className="options date-time">
+              <div className="icon">
+                <FontAwesomeIcon icon={faClock} />
               </div>
-            </div>
-          </section>
 
-          <div>
-            {slots.map(slot => (
-              <li
-                key={slot.id}
-                className="appointment-button"
-                onClick={() => {
-                  this.setState({ selectedAppointment: slot })
-                }}
-              >
-                <Moment format="D MMM - HH:mm">{slot.time}</Moment>
-              </li>
-            ))}
-          </div>
+              <div className="content">
+                <h3>Date &amp; Time</h3>
+                <div className="button-group">
+                  {slots.map(slot => (
+                    <Button
+                      key={slot.id}
+                      round="true"
+                      active={(
+                        this.state.selectedAppointment &&
+                        this.state.selectedAppointment.id === slot.id
+                      ).toString()}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          selectedAppointment: slot,
+                        })
+                      }}
+                    >
+                      <Moment format="D MMM - HH:mm">{slot.time}</Moment>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </section>
+          ) : null}
+
+          {this.state.selectedAppointment.id ? (
+            <section className="options appointment-type">
+              <div className="icon">
+                <FontAwesomeIcon icon={faVideo} />
+              </div>
+
+              <div className="content">
+                <h3>Appointment Type</h3>
+                <div className="button-group">
+                  {this.state.selectedAppointment.appointmentType.map(
+                    (type, index) => (
+                      <Button
+                        key={index}
+                        round="true"
+                        active={(
+                          this.state.appointment.type === type
+                        ).toString()}
+                        onClick={() => {
+                          console.log('Appointment Type')
+                          this.setState({
+                            ...this.state,
+                            appointment: { ...this.state.appointment, type },
+                          })
+                        }}
+                      >
+                        {type}
+                      </Button>
+                    )
+                  )}
+                </div>
+              </div>
+            </section>
+          ) : null}
 
           <div>
             <strong>Notes</strong>
@@ -132,6 +163,7 @@ class App extends Component {
           <div>
             <button
               className="button"
+              disabled={true}
               onClick={() => {
                 /* TODO: submit the data */
                 console.log('Submit the data')

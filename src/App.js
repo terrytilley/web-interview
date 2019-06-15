@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 
-import logo from './logo.png'
+import Header from './components/Header'
 import { API_ENDPOINT } from './config'
 
+import 'normalize.css'
 import './App.scss'
 
 class App extends Component {
@@ -36,46 +38,29 @@ class App extends Component {
       )
     })
 
+    const appointmentTypes = [
+      { key: 'gp', label: 'GP' },
+      { key: 'therapist', label: 'Therapist' },
+      { key: 'physio', label: 'Physio' },
+      { key: 'specialist', label: 'Specialist' },
+    ]
+
     return (
       <div className="app">
-        <h2 className="h6">New appointment</h2>
-        <div className="app-header">
-          <img src={logo} className="app-logo" alt="Babylon Health" />
-        </div>
-        <div style={{ maxWidth: 600, margin: '24px auto' }}>
-          <button
-            className="button"
-            id="GP-button"
-            onClick={e => {
-              this.setState({ selectedAppointmentType: 'gp' })
-            }}
-          >
-            GP
-          </button>
-          <button
-            className="button"
-            onClick={e => {
-              this.setState({ selectedAppointmentType: 'therapist' })
-            }}
-          >
-            Therapist
-          </button>
-          <button
-            className="button"
-            onClick={e => {
-              this.setState({ selectedAppointmentType: 'physio' })
-            }}
-          >
-            Physio
-          </button>
-          <button
-            className="button"
-            onClick={e => {
-              this.setState({ selectedAppointmentType: 'specialist' })
-            }}
-          >
-            Specialist
-          </button>
+        <Header />
+        <div className="container">
+          <h2 className="h6">New appointment</h2>
+          {appointmentTypes.map(({ key, label }) => (
+            <button
+              className="button"
+              key={key}
+              onClick={() => {
+                this.setState({ selectedAppointmentType: key })
+              }}
+            >
+              {label}
+            </button>
+          ))}
           <div>
             <strong>Appointments</strong>
             {slots.map(slot => (
@@ -86,7 +71,7 @@ class App extends Component {
                   this.setState({ selectedAppointment: slot })
                 }}
               >
-                {slot.time}
+                <Moment format="D MMM - HH:mm">{slot.time}</Moment>
               </li>
             ))}
           </div>

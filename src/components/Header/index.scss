@@ -1,0 +1,11 @@
+@import '../../constants.scss';
+
+.app-header {
+  padding: $gutter-size--large;
+
+  img {
+    max-height: 33px;
+  }
+
+  border-bottom: $border-standard;
+}

@@ -74,11 +74,16 @@ class App extends Component {
 
   render() {
     // calculate matching slots
-    const slots = this.state.availableSlots.filter(slot => {
-      return slot.consultantType.some(
-        type => type === this.state.selectedAppointmentType
-      )
-    })
+    const slots = this.state.availableSlots
+      .filter(slot => {
+        return slot.consultantType.some(
+          type => type === this.state.selectedAppointmentType
+        )
+      })
+      // filter past slots
+      .filter(slot => {
+        return slot.time > new Date().toISOString()
+      })
 
     const appointmentTypes = [
       { key: 'gp', label: 'GP' },
